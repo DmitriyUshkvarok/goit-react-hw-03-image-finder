@@ -1,3 +1,6 @@
+// how to write arrow function?
+
+
 export const App = () => {
   return (
     <div
