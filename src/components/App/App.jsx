@@ -99,16 +99,7 @@ class App extends Component {
   };
 
   render() {
-    const {
-      urlModal,
-      items,
-      showModal,
-      showButton,
-      loader,
-      totalHits,
-      page,
-      query,
-    } = this.state;
+    const { urlModal, items, showModal, showButton, loader } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleFormSubmit} />
