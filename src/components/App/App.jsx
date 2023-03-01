@@ -60,10 +60,7 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const newQuery = this.state.query;
     const newPage = this.state.page;
-    if (
-      prevState.page !== this.state.page ||
-      prevState.query !== this.state.query
-    ) {
+    if (prevState.page !== newPage || prevState.query !== newQuery) {
       this.onRenderGallery(newQuery, newPage);
     }
 
@@ -80,6 +77,7 @@ class App extends Component {
       items: [],
       query,
       page: 1,
+      total: null,
     });
   };
 
@@ -110,7 +108,6 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.handleFormSubmit} />
-
         <Container>
           {loader && <Loader />}
           <Gallery
