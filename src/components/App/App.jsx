@@ -66,6 +66,13 @@ class App extends Component {
     ) {
       this.onRenderGallery(newQuery, newPage);
     }
+
+    if (!this.state.showModal && !prevState.showModal) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   }
 
   handleFormSubmit = query => {
