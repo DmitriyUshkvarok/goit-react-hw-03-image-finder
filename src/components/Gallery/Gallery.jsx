@@ -23,7 +23,14 @@ function Gallery({ items, openModal, toggleOnLoading }) {
 export default Gallery;
 
 Gallery.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   openModal: PropTypes.func.isRequired,
   toggleOnLoading: PropTypes.func.isRequired,
 };

@@ -10,12 +10,21 @@ import Searchbar from 'components/Searchbar/Searchbar';
 import Button from 'components/Button/Button';
 import Modal from 'components/Modal/Modal';
 import Loader from 'components/Loader/Loader';
+
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+  LOADING: 'loading',
+};
 class App extends Component {
   state = {
     query: '',
     page: 1,
     totalHits: null,
     showButton: false,
+    status: Status.IDLE,
     items: [],
     showModal: false,
     urlModal: '',
@@ -60,7 +69,13 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     const newQuery = this.state.query;
     const newPage = this.state.page;
-    if (prevState.page !== newPage || prevState.query !== newQuery) {
+
+    if (this.state.status === Status.LOADING) {
+      this.setState({ status: Status.PENDING });
+      this.onRenderGallery(newQuery, newPage);
+    }
+
+    if (this.state.status !== Status.LOADING && prevState.page !== newPage) {
       this.onRenderGallery(newQuery, newPage);
     }
 
@@ -77,7 +92,8 @@ class App extends Component {
       items: [],
       query,
       page: 1,
-      total: null,
+      totalHits: null,
+      status: Status.LOADING,
     });
   };
 
